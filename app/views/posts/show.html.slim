@@ -1,0 +1,7 @@
+== @post.render_body
+= link_to 'Comment', new_post_comment_path(post_id: @post.to_param), class: 'btn' if can? :create_comment, @post
+- if @post.comments.any?
+  hr
+  h3 Comments
+  - @post.comments.roots.each do |comment|
+    = render 'comment_branch', comment_branch: comment.self_and_descendants, parent_id: nil

@@ -1,0 +1,26 @@
+div.page-header
+  h1 Listing <%= plural_table_name %>
+
+table.table.table-bordered.table-striped
+  thead
+    tr
+<% attributes.each do |attribute| -%>
+      th <%= attribute.human_name %>
+<% end -%>
+      th style="width: 140px;"
+  tbody
+  - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+    tr
+<% attributes.each do |attribute| -%>
+      td = <%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+      td
+        = link_to 'Show', <%= singular_table_name %>, :class => "btn btn-mini btn-info"
+        | &nbsp;
+        = link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), :class => "btn btn-mini btn-success"
+        | &nbsp;
+        = link_to 'Destroy', <%= singular_table_name %>, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini btn-danger"
+
+br
+
+= link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path, class: "btn"

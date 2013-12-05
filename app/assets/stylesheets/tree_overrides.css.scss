@@ -1,0 +1,8 @@
+.sortable_tree.ui-sortable div.item div.controls a.show {
+  color: #666;
+
+  &:hover {
+    color: #000;
+    text-decoration: none;
+  }
+}

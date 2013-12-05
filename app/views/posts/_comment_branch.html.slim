@@ -1,0 +1,3 @@
+- comment_branch.where(parent_id: parent_id).each do |comment|
+  = render 'comment', comment: comment
+  = render 'comment_branch', comment_branch: comment_branch, parent_id: comment.id

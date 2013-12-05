@@ -1,0 +1,12 @@
+table.table.table-bordered
+<% attributes.each do |attribute| -%>
+  tr
+    td
+      strong <%= attribute.human_name %>:
+    td
+      = @<%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+
+= link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), :class => "btn"
+'&nbsp;
+= link_to 'Back', <%= index_helper %>_path, :class => "btn"

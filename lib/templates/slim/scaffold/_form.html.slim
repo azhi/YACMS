@@ -1,0 +1,25 @@
+<%-
+
+t_helper = AuthorizedRailsScaffolds::RailsErbScaffoldHelper.new(
+  :class_name => class_name,
+  :singular_table_name => singular_table_name,
+  :file_name => file_name
+)
+
+resource_name = t_helper.resource_name
+resource_var = t_helper.resource_var
+
+-%>
+= simple_form_for(<%= resource_name %>_form_values(<%= resource_var %>), :html => { class: 'form-horizontal' }) do |f|
+  = f.error_notification
+
+  .form-inputs
+<%- attributes.each do |attribute| -%>
+    = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+<%- end -%>
+
+  .form-actions
+    = f.button :submit
+    = link_to t('.cancel', :default => t("helpers.links.cancel")),
+                <%= resource_var %>.persisted? ? <%= t_helper.controller_show_route resource_var %> : <%= t_helper.controller_index_path %>,
+                :class => 'btn'

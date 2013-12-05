@@ -1,0 +1,9 @@
+div.page-header
+  h1 Listing admin_pages
+
+ol.sortable_tree data={max_levels: 5, rebuild_url: rebuild_admin_pages_path}
+  = sortable_tree @pages
+
+br
+
+= link_to 'New Page', new_admin_page_path, class: "btn"
