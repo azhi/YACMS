@@ -4,7 +4,7 @@ module CanAddSnippet
   included do
     respond_to :json, only: :add_snippet
 
-    before_filter :empty_added_snippet_ids, only: :new
+    before_filter :empty_added_snippet_ids, only: [:new, :edit]
   end
 
   def add_snippet

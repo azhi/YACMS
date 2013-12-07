@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.1'
 
-gem 'sqlite3'
+gem 'mysql2'
 
 gem 'authorized_rails_scaffolds'
 gem 'awesome_nested_set'

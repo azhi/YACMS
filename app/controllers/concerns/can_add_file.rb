@@ -4,7 +4,7 @@ module CanAddFile
   included do
     respond_to :json, only: :add_file
 
-    before_filter :empty_added_file_ids, only: :new
+    before_filter :empty_added_file_ids, only: [:new, :edit]
   end
 
   def add_file

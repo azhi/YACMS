@@ -4,7 +4,7 @@ module CanAddImage
   included do
     respond_to :json, only: :add_image
 
-    before_filter :empty_added_image_ids, only: :new
+    before_filter :empty_added_image_ids, only: [:new, :edit]
   end
 
   def add_image
