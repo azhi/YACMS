@@ -5,14 +5,12 @@ table.table.table-bordered.table-striped
   thead
     tr
       th Title
-      th Body
       th Allow Commentaries
       th style="width: 140px;"
   tbody
   - @posts.each do |post|
     tr
       td = post.title
-      td = post.body
       td = post.allow_commentaries
       td
         = link_to 'Show', admin_post_path(post), :class => "btn btn-mini btn-info"
@@ -20,6 +18,8 @@ table.table.table-bordered.table-striped
         = link_to 'Edit', edit_admin_post_path(post), :class => "btn btn-mini btn-success"
         | &nbsp;
         = link_to 'Destroy', admin_post_path(post), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini btn-danger"
+        | &nbsp;
+        = link_to 'Preview on Frontend', post_path(post), :class => "btn btn-mini btn-info mt5"
 
 br
 

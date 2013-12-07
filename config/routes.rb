@@ -3,9 +3,19 @@ YACMS::Application.routes.draw do
     resources :pages do
       collection do
         post :rebuild
+        post :add_image
+        post :add_file
       end
     end
-    resources :posts
+    resources :posts do
+      collection do
+        post :add_image
+        post :add_file
+      end
+    end
+    resources :images, except: :show
+    resources :attachments, except: :show
+    resources :users, except: [:show, :new, :create]
     resources :settings, only: [:edit, :update]
   end
 

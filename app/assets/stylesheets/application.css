@@ -11,6 +11,7 @@
  *= require_self
  *= require jquery.ui.core
  *= require jquery.ui.theme
+ *= require jquery.ui.dialog
  *= require tree
  *= require sortable_tree
  *= require nested_options

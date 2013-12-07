@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131205191616) do
+ActiveRecord::Schema.define(version: 20131206233018) do
+
+  create_table "attachments", force: true do |t|
+    t.string   "name"
+    t.string   "file_uid"
+    t.string   "file_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attachments", ["file_name"], name: "index_attachments_on_file_name"
+  add_index "attachments", ["file_uid"], name: "index_attachments_on_file_uid"
+
+  create_table "attachments_pages", force: true do |t|
+    t.integer "attachment_id"
+    t.integer "page_id"
+  end
+
+  create_table "attachments_posts", force: true do |t|
+    t.integer "attachment_id"
+    t.integer "post_id"
+  end
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -29,6 +50,27 @@ ActiveRecord::Schema.define(version: 20131205191616) do
   add_index "comments", ["lft"], name: "index_comments_on_lft"
   add_index "comments", ["parent_id"], name: "index_comments_on_parent_id"
   add_index "comments", ["rgt"], name: "index_comments_on_rgt"
+
+  create_table "images", force: true do |t|
+    t.string   "name"
+    t.string   "image_uid"
+    t.string   "image_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "images", ["image_name"], name: "index_images_on_image_name"
+  add_index "images", ["image_uid"], name: "index_images_on_image_uid"
+
+  create_table "images_pages", force: true do |t|
+    t.integer "image_id"
+    t.integer "page_id"
+  end
+
+  create_table "images_posts", force: true do |t|
+    t.integer "image_id"
+    t.integer "post_id"
+  end
 
   create_table "pages", force: true do |t|
     t.string   "name"

@@ -1,0 +1,19 @@
+.image-select
+  .image-resize-params
+    .input-wrapper
+      = check_box_tag '', 'yes', true, id: 'enable_resizing'
+      span Enable Resizing
+    .input-wrapper
+      span Width:
+      = text_field_tag '', '300', id: 'resizing_width'
+    .input-wrapper
+      span Heigth:
+      = text_field_tag '', '300', id: 'resizing_height'
+  .image-list
+    - Image.accessible_by(current_ability).each do |image|
+      .image-inline
+        = link_to add_path,
+                  class: 'add_image',
+                  data: {'image-id' => image.id,
+                         'ckeditor-id' => ckeditor_id} do
+          = image_tag image.image.thumb('100x').url

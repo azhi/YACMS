@@ -1,9 +1,14 @@
+- if @comment.parent
+  h3 Reply To:
+  - @comment.parent.self_and_ancestors.each do |comment|
+    = render 'shared/comment', comment: comment, show_reply_link: false
+
 = simple_form_for(comment_form_values(@post, @comment), :html => { class: 'form-horizontal' }) do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :parent_id, as: :hidden
-    = f.input :body
+    = f.input :body, label: false
 
   .form-actions
     = f.button :submit

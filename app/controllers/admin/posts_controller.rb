@@ -1,8 +1,13 @@
 class Admin::PostsController < Admin::AdminController
-  load_resource :post, class_name: 'Post', instance_name: 'post', find_by: :clear_url
+  load_resource :post, class_name: 'Post', instance_name: 'post', find_by: :clear_url, except: :add_image
   authorize_resource :post
 
+  include CanAddImage
+  include CanAddFile
+
   def create
+    @post.image_ids = session[:added_image_ids].uniq.select{ |image_id| Image.where(id: image_id).exists? }
+    @post.attachment_ids = session[:added_file_ids].uniq.select{ |attachment_id| Attachment.where(id: attachment_id).exists? }
     if @post.save
       redirect_to admin_post_path(@post),  notice: "Post was successfully created."
     else
@@ -11,8 +16,11 @@ class Admin::PostsController < Admin::AdminController
   end
 
   def update
+    @post.image_ids += session[:added_image_ids].uniq.select{ |image_id| Image.where(id: image_id).exists? }
+    @post.attachment_ids = session[:added_file_ids].uniq.select{ |attachment_id| Attachment.where(id: attachment_id).exists? }
+    @post.image_ids.uniq!
     if @post.update(post_params)
-      redirect_to post_path(@post), notice: "Post was successfully updated."
+      redirect_to admin_post_path(@post), notice: "Post was successfully updated."
     else
       render action: "edit"
     end

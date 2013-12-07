@@ -33,24 +33,16 @@ html lang="en"
             = render_navigation expand_all: true
             ul.nav
               - if user_signed_in?
-                li= link_to 'Sign Out', destroy_user_session_path
+                li= link_to 'Sign Out', destroy_user_session_path, method: :delete
               - else
                 li= link_to 'Sign In', new_user_session_path
 
     .container
 
       .row
-        .span9
+        .span12
           = bootstrap_flash
           = yield
-        .span3
-          .well.sidebar-nav
-            h3 Sidebar
-            ul.nav.nav-list
-              li.nav-header Sidebar
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
-    
+
       footer
         p &copy; Company 2013

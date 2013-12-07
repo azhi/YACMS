@@ -16,6 +16,7 @@
 //= require jquery.ui.mouse
 //= require jquery.ui.position
 //= require jquery.ui.sortable
+//= require jquery.ui.dialog
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require ckeditor-jquery

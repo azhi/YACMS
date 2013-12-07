@@ -1,3 +1,4 @@
+= render 'shared/select_image', add_path: add_image_admin_pages_path, ckeditor_id: 'page_body'
 = simple_form_for(page_form_values(@page), :html => { class: 'form-horizontal' }) do |f|
   = f.error_notification
 
@@ -7,6 +8,10 @@
     = f.input :parent_id do
       = f.select :parent_id, nested_options(Page.all, :selected => @page.parent),
                  {include_blank: true}, {class: :nested_options}
+    = link_to 'Add image', '#', class: 'show_select_images_popup btn'
+    = select_tag '', options_for_select(Attachment.accessible_by(current_ability).map{ |f| [f.name, f.id] }),
+                 id: 'select_file'
+    = link_to 'Add file', add_file_admin_pages_path, class: 'add_file btn', data: {ckeditor_id: 'page_body'}
     = f.input :body, as: :ckeditor, :ckeditor => {"toolbar" => "Basic"}
     = f.input :show_in_menu
 

@@ -3,12 +3,16 @@ class Admin::PagesController < Admin::AdminController
   authorize_resource :page
 
   include TheSortableTreeController::Rebuild
+  include CanAddImage
+  include CanAddFile
 
   def index
     @pages = Page.nested_set.select('id, name, title, parent_id, clear_url').all
   end
 
   def create
+    @page.image_ids = session[:added_image_ids].uniq.select{ |image_id| Image.where(id: image_id).exists? }
+    @page.attachment_ids = session[:added_file_ids].uniq.select{ |attachment_id| Attachment.where(id: attachment_id).exists? }
     if @page.save
       redirect_to admin_page_path(@page),  notice: "Page was successfully created."
     else
@@ -17,6 +21,8 @@ class Admin::PagesController < Admin::AdminController
   end
 
   def update
+    @page.image_ids = session[:added_image_ids].uniq.select{ |image_id| Image.where(id: image_id).exists? }
+    @page.attachment_ids = session[:added_file_ids].uniq.select{ |attachment_id| Attachment.where(id: attachment_id).exists? }
     if @page.update(page_params)
       redirect_to admin_page_path(@page), notice: "Page was successfully updated."
     else

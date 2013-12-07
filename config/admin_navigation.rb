@@ -15,6 +15,21 @@ SimpleNavigation::Configuration.run do |navigation|
                  admin_posts_path,
                  :if => proc { Setting.enable_blog && can?(:manage, Post) },
                  :class => 'posts')
+    primary.item(:images,
+                 'Images',
+                 admin_images_path,
+                 :if => proc { can?(:manage, Image) },
+                 :class => 'images')
+    primary.item(:attachments,
+                 'Files',
+                 admin_attachments_path,
+                 :if => proc { can?(:manage, Attachment) },
+                 :class => 'attachments')
+    primary.item(:users,
+                 'Users',
+                 admin_users_path,
+                 :if => proc { can?(:manage, User) },
+                 :class => 'users')
     primary.item(:settings,
                  'Settings',
                  edit_admin_setting_path(Setting.first),

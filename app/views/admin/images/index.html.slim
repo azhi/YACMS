@@ -1,0 +1,22 @@
+div.page-header
+  h1 Listing images
+
+table.table.table-bordered.table-striped
+  thead
+    tr
+      th Name
+      th Image
+      th style="width: 140px;"
+  tbody
+  - @images.each do |image|
+    tr
+      td = image.name
+      td = image_tag image.image.thumb('500x').url
+      td
+        = link_to 'Edit', edit_admin_image_path(image), :class => "btn btn-mini btn-success"
+        | &nbsp;
+        = link_to 'Destroy', admin_image_path(image), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini btn-danger"
+
+br
+
+= link_to 'New Image', new_admin_image_path, class: "btn"

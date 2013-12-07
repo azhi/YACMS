@@ -12,3 +12,42 @@
     margin-right: #{$size}px
   }
 }
+
+a.show_select_images_popup {
+  margin-left: 180px;
+  margin-bottom: 10px;
+}
+
+a.add_file {
+  margin-bottom: 10px;
+}
+
+select#select_file {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.image-select {
+  display: none;
+
+  .image-resize-params {
+    margin-bottom: 10px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .input-wrapper input[type=text] {
+      height: 10px;
+      font-size: 10px;
+      margin-left: 3px;
+      margin-top: 8px;
+    }
+  }
+
+  .image-inline {
+    display: inline;
+    padding: 5px;
+    max-height: 100px;
+  }
+}

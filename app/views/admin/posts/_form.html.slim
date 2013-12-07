@@ -1,8 +1,10 @@
+= render 'shared/select_image', add_path: add_image_admin_posts_path, ckeditor_id: 'post_body'
 = simple_form_for(post_form_values(@post), :html => { class: 'form-horizontal' }) do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :title
+    = link_to 'Add image', '#', class: 'show_select_images_popup btn'
     = f.input :body, as: :ckeditor, :ckeditor => {"toolbar" => "Basic"}
     = f.input :allow_commentaries
 

@@ -1,0 +1,22 @@
+div.page-header
+  h1 Listing files
+
+table.table.table-bordered.table-striped
+  thead
+    tr
+      th Name
+      th File
+      th style="width: 140px;"
+  tbody
+  - @attachments.each do |attachment|
+    tr
+      td = attachment.name
+      td = attachment.file.name
+      td
+        = link_to 'Edit', edit_admin_attachment_path(attachment), :class => "btn btn-mini btn-success"
+        | &nbsp;
+        = link_to 'Destroy', admin_attachment_path(attachment), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini btn-danger"
+
+br
+
+= link_to 'New File', new_admin_attachment_path, class: "btn"
