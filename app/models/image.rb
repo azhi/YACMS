@@ -7,7 +7,7 @@ class Image < ActiveRecord::Base
   after_update :update_dependent_materials
 
   def update_dependent_materials
-    posts.each(&:regenerate_img_srcs!)
-    pages.each(&:regenerate_img_srcs!)
+    posts.each(&:regenerate_images!)
+    pages.each(&:regenerate_images!)
   end
 end

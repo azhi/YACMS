@@ -12,6 +12,9 @@
     = select_tag '', options_for_select(Attachment.accessible_by(current_ability).map{ |f| [f.name, f.id] }),
                  id: 'select_file'
     = link_to 'Add file', add_file_admin_pages_path, class: 'add_file btn', data: {ckeditor_id: 'page_body'}
+    = select_tag '', options_for_select(Snippet.accessible_by(current_ability).map{ |s| [s.name, s.id] }),
+                 id: 'select_snippet'
+    = link_to 'Add snippet', add_snippet_admin_pages_path, class: 'add_snippet btn', data: {ckeditor_id: 'page_body'}
     = f.input :body, as: :ckeditor, :ckeditor => {"toolbar" => "Basic"}
     = f.input :show_in_menu
 

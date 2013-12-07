@@ -18,11 +18,11 @@ a.show_select_images_popup {
   margin-bottom: 10px;
 }
 
-a.add_file {
+a.add_file, a.add_snippet {
   margin-bottom: 10px;
 }
 
-select#select_file {
+select#select_file, select#select_snippet {
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;

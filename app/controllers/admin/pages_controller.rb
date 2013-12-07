@@ -5,6 +5,7 @@ class Admin::PagesController < Admin::AdminController
   include TheSortableTreeController::Rebuild
   include CanAddImage
   include CanAddFile
+  include CanAddSnippet
 
   def index
     @pages = Page.nested_set.select('id, name, title, parent_id, clear_url').all
@@ -13,6 +14,7 @@ class Admin::PagesController < Admin::AdminController
   def create
     @page.image_ids = session[:added_image_ids].uniq.select{ |image_id| Image.where(id: image_id).exists? }
     @page.attachment_ids = session[:added_file_ids].uniq.select{ |attachment_id| Attachment.where(id: attachment_id).exists? }
+    @page.snippet_ids = session[:added_snippet_ids].uniq.select{ |snippet_id| Snippet.where(id: snippet_id).exists? }
     if @page.save
       redirect_to admin_page_path(@page),  notice: "Page was successfully created."
     else
@@ -21,8 +23,12 @@ class Admin::PagesController < Admin::AdminController
   end
 
   def update
-    @page.image_ids = session[:added_image_ids].uniq.select{ |image_id| Image.where(id: image_id).exists? }
-    @page.attachment_ids = session[:added_file_ids].uniq.select{ |attachment_id| Attachment.where(id: attachment_id).exists? }
+    @page.image_ids += session[:added_image_ids].uniq.select{ |image_id| Image.where(id: image_id).exists? }
+    @page.attachment_ids += session[:added_file_ids].uniq.select{ |attachment_id| Attachment.where(id: attachment_id).exists? }
+    @page.snippet_ids += session[:added_snippet_ids].uniq.select{ |snippet_id| Snippet.where(id: snippet_id).exists? }
+    @page.image_ids.uniq!
+    @page.attachment_ids.uniq!
+    @page.snippet_ids.uniq!
     if @page.update(page_params)
       redirect_to admin_page_path(@page), notice: "Page was successfully updated."
     else

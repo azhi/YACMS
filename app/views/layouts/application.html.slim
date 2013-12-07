@@ -28,7 +28,7 @@ html lang="en"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand href="#"YACMS
+          a.brand href="#"= Setting.company_name
           .container.nav-collapse
             = render_navigation expand_all: true
             ul.nav
@@ -45,4 +45,7 @@ html lang="en"
           = yield
 
       footer
-        p &copy; Company 2013
+        p
+          ' &copy;
+          =' Setting.company_name
+          = Date.today.year

@@ -1,0 +1,24 @@
+div.page-header
+  h1 Listing snippets
+
+table.table.table-bordered.table-striped
+  thead
+    tr
+      th Name
+      th Content
+      th style="width: 140px;"
+  tbody
+  - @snippets.each do |snippet|
+    tr
+      td = snippet.name
+      td = snippet.content
+      td
+        = link_to 'Show', admin_snippet_path(snippet), :class => "btn btn-mini btn-info"
+        | &nbsp;
+        = link_to 'Edit', edit_admin_snippet_path(snippet), :class => "btn btn-mini btn-success"
+        | &nbsp;
+        = link_to 'Destroy', admin_snippet_path(snippet), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-mini btn-danger"
+
+br
+
+= link_to 'New Snippet', new_admin_snippet_path, class: "btn"

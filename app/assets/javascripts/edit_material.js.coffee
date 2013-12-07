@@ -51,7 +51,23 @@ $ ->
       },
       success: (data) ->
         editor = CKEDITOR.instances[ckeditor_id]
-        console.log data.file
         if editor
           editor.insertHtml(data.file)
+    })
+
+  $('a.add_snippet').click (e) ->
+    e.preventDefault()
+    ckeditor_id = $(@).data('ckeditor-id')
+    snippet_id = $('select#select_snippet').val()
+    $.ajax({
+      dataType: "json",
+      url: $(@).attr('href'),
+      method: 'post',
+      data: {
+        snippet_id: snippet_id,
+      },
+      success: (data) ->
+        editor = CKEDITOR.instances[ckeditor_id]
+        if editor
+          editor.insertHtml(data.snippet)
     })

@@ -5,16 +5,19 @@ YACMS::Application.routes.draw do
         post :rebuild
         post :add_image
         post :add_file
+        post :add_snippet
       end
     end
     resources :posts do
       collection do
         post :add_image
         post :add_file
+        post :add_snippet
       end
     end
     resources :images, except: :show
     resources :attachments, except: :show
+    resources :snippets
     resources :users, except: [:show, :new, :create]
     resources :settings, only: [:edit, :update]
   end

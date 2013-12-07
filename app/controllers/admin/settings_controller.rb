@@ -17,6 +17,6 @@ class Admin::SettingsController < Admin::AdminController
   protected
 
   def setting_params
-    params.require(:setting).permit(:home_page_id, :enable_menu, :enable_blog)
+    params.require(:setting).permit(:home_page_id, :company_name, :enable_menu, :enable_blog)
   end
 end

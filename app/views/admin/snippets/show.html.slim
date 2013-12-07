@@ -1,0 +1,15 @@
+table.table.table-bordered
+  tr
+    td
+      strong Name:
+    td
+      = @snippet.name
+  tr
+    td
+      strong Content:
+    td
+      = @snippet.content
+
+= link_to 'Edit', edit_admin_snippet_path(@snippet), :class => "btn"
+'&nbsp;
+= link_to 'Back', admin_snippets_path, :class => "btn"

@@ -1,5 +1,7 @@
 $ ->
-  CKEDITOR.config.extraAllowedContent = 'img[!data-image-id, data-image-resizing-width, data-image-resizing-height]; a[data-file-id]'
+  CKEDITOR.config.extraAllowedContent = 'img[!data-image-id, data-image-resizing-width, ' +
+                                        'data-image-resizing-height]; a[data-file-id]; ' +
+                                        'span[data-snippet-id]'
   CKEDITOR.on 'instanceReady', (evt) ->
     editor = evt.editor
     html_rules = elements:

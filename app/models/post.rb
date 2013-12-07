@@ -1,11 +1,12 @@
 class Post < ActiveRecord::Base
-  include CanRegenerateSrcs
+  include CanRegenerateContent
   include HasClearUrl
   generate_clear_url_from :title
 
   has_many :comments, dependent: :destroy
   has_and_belongs_to_many :images
   has_and_belongs_to_many :attachments
+  has_and_belongs_to_many :snippets
 
   def self.template_variables
     {cut: {tag: '<cut />',

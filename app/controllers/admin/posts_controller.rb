@@ -4,10 +4,12 @@ class Admin::PostsController < Admin::AdminController
 
   include CanAddImage
   include CanAddFile
+  include CanAddSnippet
 
   def create
     @post.image_ids = session[:added_image_ids].uniq.select{ |image_id| Image.where(id: image_id).exists? }
     @post.attachment_ids = session[:added_file_ids].uniq.select{ |attachment_id| Attachment.where(id: attachment_id).exists? }
+    @post.snippet_ids = session[:added_snippet_ids].uniq.select{ |snippet_id| Snippet.where(id: snippet_id).exists? }
     if @post.save
       redirect_to admin_post_path(@post),  notice: "Post was successfully created."
     else
@@ -17,8 +19,11 @@ class Admin::PostsController < Admin::AdminController
 
   def update
     @post.image_ids += session[:added_image_ids].uniq.select{ |image_id| Image.where(id: image_id).exists? }
-    @post.attachment_ids = session[:added_file_ids].uniq.select{ |attachment_id| Attachment.where(id: attachment_id).exists? }
+    @post.attachment_ids += session[:added_file_ids].uniq.select{ |attachment_id| Attachment.where(id: attachment_id).exists? }
+    @post.snippet_ids += session[:added_snippet_ids].uniq.select{ |snippet_id| Snippet.where(id: snippet_id).exists? }
     @post.image_ids.uniq!
+    @post.attachment_ids.uniq!
+    @post.snippet_ids.uniq!
     if @post.update(post_params)
       redirect_to admin_post_path(@post), notice: "Post was successfully updated."
     else

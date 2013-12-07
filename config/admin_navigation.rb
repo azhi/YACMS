@@ -25,6 +25,11 @@ SimpleNavigation::Configuration.run do |navigation|
                  admin_attachments_path,
                  :if => proc { can?(:manage, Attachment) },
                  :class => 'attachments')
+    primary.item(:snippets,
+                 'Snippets',
+                 admin_snippets_path,
+                 :if => proc { can?(:manage, Snippet) },
+                 :class => 'snippets')
     primary.item(:users,
                  'Users',
                  admin_users_path,

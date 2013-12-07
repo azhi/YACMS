@@ -9,7 +9,7 @@ class Ability
   def guest
     can :read, Page
     can :home, Page
-    can :read, Post
+    can :read, Post if Setting.enable_blog
     can :read, Comment
   end
 
@@ -22,10 +22,11 @@ class Ability
   def admin
     user
     can :manage, Page
-    can :manage, Post
+    can :manage, Post if Setting.enable_blog
     cannot :create_comment, Post, allow_commentaries: false
     can :manage, Image
     can :manage, Attachment
+    can :manage, Snippet
     can :manage, Setting
     can :manage, User
     cannot :update, User, id: @user.id

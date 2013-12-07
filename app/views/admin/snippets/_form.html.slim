@@ -1,0 +1,12 @@
+= simple_form_for(snippet_form_values(@snippet), :html => { class: 'form-horizontal' }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :content
+
+  .form-actions
+    = f.button :submit
+    = link_to t('.cancel', :default => t("helpers.links.cancel")),
+                @snippet.persisted? ? admin_snippet_path(@snippet) : admin_snippets_path,
+                :class => 'btn'

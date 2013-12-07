@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206233018) do
+ActiveRecord::Schema.define(version: 20131207134503) do
 
   create_table "attachments", force: true do |t|
     t.string   "name"
@@ -91,6 +91,11 @@ ActiveRecord::Schema.define(version: 20131206233018) do
   add_index "pages", ["parent_id"], name: "index_pages_on_parent_id"
   add_index "pages", ["rgt"], name: "index_pages_on_rgt"
 
+  create_table "pages_snippets", force: true do |t|
+    t.integer "page_id"
+    t.integer "snippet_id"
+  end
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "body"
@@ -100,13 +105,28 @@ ActiveRecord::Schema.define(version: 20131206233018) do
     t.datetime "updated_at"
   end
 
+  create_table "posts_snippets", force: true do |t|
+    t.integer "post_id"
+    t.integer "snippet_id"
+  end
+
   create_table "settings", force: true do |t|
     t.integer  "home_page_id"
     t.boolean  "enable_blog"
     t.boolean  "enable_menu"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "company_name"
   end
+
+  create_table "snippets", force: true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "snippets", ["name"], name: "index_snippets_on_name"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",     null: false
